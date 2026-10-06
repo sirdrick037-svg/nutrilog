@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,6 @@
 </head>
 
 <body>
-
     <h1>NutriLog</h1>
 
     <h2>Add a Meal</h2>
@@ -25,5 +25,32 @@
 
     </form>
 
+    <h2>Meals</h2>
+
+    {% if meals %}
+
+        <ul>
+
+            {% for meal in meals %}
+
+                <li>
+                    {{ meal.name }}
+                    -
+                    {{ meal.calories }} calories
+                    -
+                    {{ meal.date }}
+                </li>
+
+            {% endfor %}
+
+        </ul>
+
+    {% else %}
+
+        <p>No meals have been added yet.</p>
+
+    {% endif %}
+
 </body>
+
 </html>
