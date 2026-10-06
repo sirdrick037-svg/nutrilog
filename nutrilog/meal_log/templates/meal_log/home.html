@@ -39,6 +39,8 @@
                     {{ meal.calories }} calories
                     -
                     {{ meal.date }}
+                    -
+                    <a href="{% url 'edit_meal' meal.id %}">Edit</a>
                 </li>
 
             {% endfor %}
