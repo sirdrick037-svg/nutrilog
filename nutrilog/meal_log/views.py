@@ -60,3 +60,10 @@ def delete_meal(request, meal_id):
         return redirect('home')
 
     return redirect('home')
+
+def reset_today(request):
+    if request.method == 'POST':
+        today = timezone.localdate()
+        MealEntry.objects.filter(date=today).delete()
+
+    return redirect('home')
