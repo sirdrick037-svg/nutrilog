@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+from django.utils import timezone
+
 from .forms import MealEntryForm
 from .models import MealEntry
 
@@ -14,9 +16,18 @@ def home(request):
     else:
         form = MealEntryForm()
 
-    meals = MealEntry.objects.all().order_by('-date', '-created_at')
+    today = timezone.localdate()
+
+    meals = MealEntry.objects.filter(
+        date=today
+    ).order_by('-created_at')
+
+    total_calories = sum(
+        meal.calories for meal in meals
+    )
 
     return render(request, 'meal_log/home.html', {
         'form': form,
         'meals': meals,
+        'total_calories': total_calories,
     })
