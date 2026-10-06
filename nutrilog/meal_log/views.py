@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_list_or_404
 from django.utils import timezone
 
 from .forms import MealEntryForm
@@ -30,4 +30,23 @@ def home(request):
         'form': form,
         'meals': meals,
         'total_calories': total_calories,
+    })
+
+
+def edit_meal(request, meal_id):
+    meal = get_object_or_404(MealEntry, id=meal_id)
+
+    if request.method == 'POST':
+        form = MealEntryForm(request.POST, instance=meal)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+
+    else:
+        form = MealEntryForm(instance=meal)
+
+    return render(request, 'meal_log/edit_meal.html', {
+        'form': form,
+        'meal': meal,
     })
