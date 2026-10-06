@@ -15,7 +15,35 @@
     <form method="POST" class="space-y-4">
         {% csrf_token %}
 
-        {{ form.as_p }}
+        <div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">
+        Food name
+    </label>
+    {{ form.name }}
+    {% if form.name.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ form.name.errors }}</p>
+    {% endif %}
+</div>
+
+<div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">
+        Calories
+    </label>
+    {{ form.calories }}
+    {% if form.calories.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ form.calories.errors }}</p>
+    {% endif %}
+</div>
+
+<div>
+    <label class="block text-sm font-medium text-gray-700 mb-1">
+        Date
+    </label>
+    {{ form.date }}
+    {% if form.date.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ form.date.errors }}</p>
+    {% endif %}
+</div>
 
         <button
             type="submit"
