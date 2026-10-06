@@ -1,7 +1,6 @@
 from django.shortcuts import get_object_or_404, render,redirect, get_list_or_404
 from django.utils import timezone
-from django.views.decoraters.http import require_post
-
+from django.views.decorators.http import require_post
 from .forms import MealEntryForm
 from .models import MealEntry
 
@@ -52,8 +51,11 @@ def edit_meal(request, meal_id):
         'meal': meal,
     })
 
-@require_POST
 def delete_meal(request, meal_id):
     meal = get_object_or_404(MealEntry, id=meal_id)
-    meal.delete()
+
+    if request.method == 'POST':
+        meal.delete()
+        return redirect('home')
+
     return redirect('home')
