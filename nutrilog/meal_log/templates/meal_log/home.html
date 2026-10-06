@@ -9,9 +9,21 @@
 
 <body>
 
-    <h1>Welcome to NutriLog</h1>
+    <h1>NutriLog</h1>
 
-    <p>Your daily nutrition and calorie tracker.</p>
+    <h2>Add a Meal</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit">
+            Add Meal
+        </button>
+
+    </form>
 
 </body>
 </html>
